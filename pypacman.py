@@ -182,7 +182,7 @@ class Pacman(pygame.sprite.Sprite):
         self.real_x = self.x * 24 * 10
         self.real_y = self.y * 24 * 10
         self.speed = 55
-        self.direction = "left"
+        self.direction = "up"
         self.mode = "normal"
         self.allowed_moves = []
         self.count_moves = 0
@@ -238,7 +238,7 @@ class Pacman(pygame.sprite.Sprite):
             chase = True
 
         # Removed fruits for simplicity
-        '''# Bonus !
+        # Bonus !
         if MAP[self.y][self.x] >= 7 and MAP[self.y][self.x] <= 14:
             self.game.score += FRUITS[LEVELS[self.game.level]['bonus']]['score']
             MAP[self.y][self.x] = 0
@@ -249,7 +249,7 @@ class Pacman(pygame.sprite.Sprite):
         # Second bonus at 70 remainings
         if self.game.pacgums in (70,170) and self.set_bonus != self.game.pacgums:
             self.set_bonus = self.game.pacgums
-            MAP[17][13] = FRUITS[LEVELS[self.game.level]['bonus']]['id']'''
+            MAP[17][13] = FRUITS[LEVELS[self.game.level]['bonus']]['id']
 
         return chase
 
