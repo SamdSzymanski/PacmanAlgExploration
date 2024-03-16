@@ -172,6 +172,7 @@ class Pacman(pygame.sprite.Sprite):
         """
 
         self.alg = alg
+        self.alg.setup()
 
         self.x = x
         self.y = y
@@ -1013,7 +1014,7 @@ class Game:
         """
         TBD: display a text
         """
-        font = pygame.font.Font('RetroGaming.ttf', 18)
+        font = pygame.font.Font('themes/RetroGaming.ttf', 18)
         text = font.render(my_text, True, color)
         my_surface.blit(text, (pos_x, pos_y))
 
