@@ -1,5 +1,5 @@
 .*
 !.gitignore
-pycache/
-algs/pycache/
+__pycache__/
+algs/__pycache__/
 *.pyc
