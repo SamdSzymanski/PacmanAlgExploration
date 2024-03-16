@@ -15,6 +15,7 @@ import argparse
 
 #algs
 from algs.rand_dir import Rand_Dir
+from algs.rand_dir_legal import Rand_Dir_Legal
 
 LEVELS = {}
 
@@ -171,8 +172,9 @@ class Pacman(pygame.sprite.Sprite):
         Reinit pacman parameters
         """
 
-        self.alg = alg
-        self.alg.setup()
+        if alg != None:
+          self.alg = alg
+          self.alg.setup()
 
         self.x = x
         self.y = y
@@ -803,6 +805,8 @@ class Game:
         self.lifes = 3
 
         self.pacgums = self.count_pacgums()
+        print('Pacgums: ',self.pacgums)
+
         self.score = 0
 
         self.scale = 1
@@ -887,7 +891,6 @@ class Game:
             self.theme = 'default'
         else:
             self.theme = args.theme
-
 
     def load_sounds(self):
         """
