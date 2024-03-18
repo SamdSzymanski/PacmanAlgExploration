@@ -18,7 +18,7 @@
     \subsection*{The Algorithms}
       This component is really a set of components. This is the set of algorithms that will be used to control Pac-Man. Each algorithm will be contained within a class representing that algorithm and containing all its logic. Instances of these algorithm classes will be instantiated and passed as arguments to the Pac-Man constructor to set that algorithm as the controller for that instance of Pac-Man. Some, but not all, ideas we are moving forward with to implement in our algorithms are:
       \begin{itemize}
-        \itemsep-4pt
+        \itemsep0pt
           \item Randomness. To be used as a baseline of comparison. How well does Pac-Man perform when he is moving randomly? (Spoiler: Not well!)
           \item Predictable patterns. Algorithms that play the game in predictable ways.
           \item Choosing points. Algorithms that select points in the maze to move to, based on some criteria, and move to them using some pathfinding algorithm.
@@ -29,7 +29,7 @@
     \subsection*{Data Collection}
       Data about the performance of each algorithm will be collected at the end of each algorithm's attempt at playing Pac-Man. This data will be collected into a Comma Separated Values (CSV) file or multiple CSV files for later reference using Python's Pandas library. Some of the data points we intend to track include:
       \begin{itemize}
-        \itemsep-4pt
+        \itemsep0pt
         \item Success. Did Pac-Man win?
         \item Lives lost. The number of lives Pac-Man lost
         \item Points scored. The number of points Pac-Man scored
@@ -39,7 +39,7 @@
       The aforementioned data will later be processed into a smaller dataset of key performance metrics for each algorithm and a set of graphs meant to graphically display the performance of each algorithm and compare said performance. These actions will be completed using the Python libraries Pandas, Scipy, and Pyplot from Matplotlib. Some performance metrics we intend to collect from the data include:
       \begin{multicols}{2}
         \begin{itemize}
-          \itemsep-4pt
+          \itemsep0pt
           \item Means
           \item Medians
           \item Modes
@@ -51,7 +51,7 @@
       \newpage
       And some graphs we intend to produce include: 
       \begin{itemize}
-        \itemsep-4pt
+        \itemsep0pt
         \item Histograms
         \item Scatter plots
         \item Bar charts
@@ -70,7 +70,7 @@
     \subsection*{Why did we choose a particular language/framework?}
       We chose to build our project in Python for a few reasons.
       \begin{itemize}
-        \itemsep-4pt
+        \itemsep0pt
         \item Our group was most familiar with coding in Python.
         \item The Pygame library provides much of what we need for this project.
         \item The Python community is big and provided us with many models to base our project off of.
