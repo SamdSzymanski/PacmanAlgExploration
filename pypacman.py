@@ -16,6 +16,8 @@ import argparse
 #algs
 from algs.rand_dir import Rand_Dir
 from algs.rand_dir_legal import Rand_Dir_Legal
+from algs.rand_dir_hold import Rand_Dir_Hold
+
 
 LEVELS = {}
 
@@ -148,7 +150,7 @@ class Pacman(pygame.sprite.Sprite):
     def __init__(self, my_game, x, y, alg):
         pygame.sprite.Sprite.__init__(self)
 
-        self.alg = None
+        self.alg = Rand_Dir_Hold() 
 
         self.game = my_game
         self.x = None
@@ -334,7 +336,9 @@ class Pacman(pygame.sprite.Sprite):
                       if self.y + 1 < 30 and MAP[self.y + 1][self.x] < 16:
                           self.direction = "down"
                 else: # if algorithm in use get direction from it
-                  self.direction = self.alg.get_dir()
+                  self.direction = self.alg.get_dir(self.allowed_moves)
+
+
                   
             #print('Pacman, direction=', self.real_x, self.real_y, self.x, self.y,  self.direction, 'Original speed=', self.speed, 'loop_speed=',speed, 'loops values', next_loops)
             # Direction is set : move the ghost
