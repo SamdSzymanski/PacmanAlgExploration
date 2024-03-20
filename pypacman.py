@@ -15,6 +15,7 @@ import argparse
 
 #algs
 from algs.rand_dir import Rand_Dir
+from algs.rand_dir_legal import Rand_Dir_Legal
 from algs.rand_dir_hold import Rand_Dir_Hold
 
 
@@ -173,7 +174,9 @@ class Pacman(pygame.sprite.Sprite):
         Reinit pacman parameters
         """
 
-        self.alg = Rand_Dir_Hold() 
+        if alg != None:
+          self.alg = alg
+          self.alg.setup()
 
         self.x = x
         self.y = y
@@ -184,7 +187,7 @@ class Pacman(pygame.sprite.Sprite):
         self.real_x = self.x * 24 * 10
         self.real_y = self.y * 24 * 10
         self.speed = 55
-        self.direction = "left"
+        self.direction = "up"
         self.mode = "normal"
         self.allowed_moves = []
         self.count_moves = 0
@@ -240,7 +243,7 @@ class Pacman(pygame.sprite.Sprite):
             chase = True
 
         # Removed fruits for simplicity
-        '''# Bonus !
+        # Bonus !
         if MAP[self.y][self.x] >= 7 and MAP[self.y][self.x] <= 14:
             self.game.score += FRUITS[LEVELS[self.game.level]['bonus']]['score']
             MAP[self.y][self.x] = 0
@@ -251,7 +254,7 @@ class Pacman(pygame.sprite.Sprite):
         # Second bonus at 70 remainings
         if self.game.pacgums in (70,170) and self.set_bonus != self.game.pacgums:
             self.set_bonus = self.game.pacgums
-            MAP[17][13] = FRUITS[LEVELS[self.game.level]['bonus']]['id']'''
+            MAP[17][13] = FRUITS[LEVELS[self.game.level]['bonus']]['id']
 
         return chase
 
@@ -806,6 +809,8 @@ class Game:
         self.lifes = 3
 
         self.pacgums = self.count_pacgums()
+        print('Pacgums: ',self.pacgums)
+
         self.score = 0
 
         self.scale = 1
@@ -890,7 +895,6 @@ class Game:
             self.theme = 'default'
         else:
             self.theme = args.theme
-
 
     def load_sounds(self):
         """
@@ -1017,7 +1021,7 @@ class Game:
         """
         TBD: display a text
         """
-        font = pygame.font.Font('RetroGaming.ttf', 18)
+        font = pygame.font.Font('themes/RetroGaming.ttf', 18)
         text = font.render(my_text, True, color)
         my_surface.blit(text, (pos_x, pos_y))
 
