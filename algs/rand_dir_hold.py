@@ -1,10 +1,14 @@
-import random
+from random import choice
 
 class Rand_Dir_Hold():
-    def __init__(self):
-        self.current_direction = None
 
-    def get_dir(self, allowed_moves):
-        if self.current_direction is None or self.current_direction not in allowed_moves:
-            self.current_direction = random.choice(allowed_moves)
-        return self.current_direction
+  game = None
+
+  def setup(self):
+    print('Rand_Dir_Hold ready')
+
+  def get_dir(self):
+    direct = self.game.pacman.direction
+    if direct not in self.game.pacman.allowed_moves:
+      return choice(['up', 'right', 'down', 'left'])
+    return direct

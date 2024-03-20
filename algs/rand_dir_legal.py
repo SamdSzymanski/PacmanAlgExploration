@@ -1,4 +1,4 @@
-from random import randint
+from random import choice
 
 class Rand_Dir_Legal():
 
@@ -8,5 +8,4 @@ class Rand_Dir_Legal():
     print('Rand_Dir_Legal ready')
 
   def get_dir(self):
-    moves = self.game.pacman.allowed_moves
-    return moves[randint(0, len(moves) - 1)]
+    return choice(self.game.pacman.allowed_moves)
