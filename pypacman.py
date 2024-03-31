@@ -21,6 +21,7 @@ from algs.rand_dir_charge import Rand_Dir_Charge
 from algs.rand_dir_legal_hold import Rand_Dir_Legal_Hold
 from algs.rand_turn import Rand_Turn
 from algs.rand_turn_legal import Rand_Turn_Legal
+from algs.bfs_mod import BFS_Mod
 
 
 LEVELS = {}
@@ -113,7 +114,7 @@ MAP = [
         [52, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 53, 52, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 53],
         [50,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 33, 33,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 51],
         [50,  2, 34, 32, 32, 35,  1, 34, 32, 32, 32, 35,  1, 33, 33,  1, 34, 32, 32, 32, 35,  1, 34, 32, 32, 35,  1, 51],
-        [50,  1, 33,  0,  0, 33,  1, 33,  0,  0,  0, 33,  1, 33, 33,  1, 33,  0,  0,  0, 33,  1, 33,  0,  0, 33,  2, 51],
+        [50,  1, 33,  18,  18, 33,  1, 33,  18,  18,  18, 33,  1, 33, 33,  1, 33,  18,  18,  18, 33,  1, 33,  18,  18, 33,  2, 51],
         [50,  1, 36, 32, 32, 37,  1, 36, 32, 32, 32, 37,  1, 36, 37,  1, 36, 32, 32, 32, 37,  1, 36, 32, 32, 37,  1, 51],
         [50,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 51],
         [50,  1, 34, 32, 32, 35,  1, 34, 35,  1, 34, 32, 32, 32, 32, 32, 32, 35,  1, 34, 35,  1, 34, 32, 32, 35,  1, 51],
@@ -123,8 +124,8 @@ MAP = [
         [16, 16, 16, 16, 16, 50,  1, 33, 34, 32, 32, 37,  0, 36, 37,  0, 36, 32, 32, 35, 33,  1, 51, 16, 16, 16, 16, 16],
         [16, 16, 16, 16, 16, 50,  1, 33, 33,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 33, 33,  1, 51, 16, 16, 16, 16, 16],
         [16, 16, 16, 16, 16, 50,  1, 33, 33,  0, 56, 49, 49, 17, 17, 49, 49, 57,  0, 33, 33,  1, 51, 16, 16, 16, 16, 16],
-        [48, 48, 48, 48, 48, 58,  1, 36, 37,  0, 51, 64, 64,  0,  0, 64, 64, 50,  0, 36, 37,  1, 59, 48, 48, 48, 48, 48],
-        [15, 15, 15, 15, 15, 15,  1,  0,  0,  0, 51, 64,  0,  0,  0,  0, 64, 50,  0,  0,  0,  1, 15, 15, 15, 15, 15, 15],
+        [48, 48, 48, 48, 48, 58,  1, 36, 37,  0, 51, 64, 64,  18,  18, 64, 64, 50,  0, 36, 37,  1, 59, 48, 48, 48, 48, 48],
+        [15, 15, 15, 15, 15, 15,  1,  0,  0,  0, 51, 64,  18,  18,  18,  18, 64, 50,  0,  0,  0,  1, 15, 15, 15, 15, 15, 15],
         [49, 49, 49, 49, 49, 57,  1, 34, 35,  0, 51, 64, 64, 64, 64, 64, 64, 50,  0, 34, 35,  1, 56, 49, 49, 49, 49, 49],
         [16, 16, 16, 16, 16, 50,  1, 33, 33,  0, 59, 48, 48, 48, 48, 48, 48, 58,  0, 33, 33,  1, 51, 16, 16, 16, 16, 16],
         [16, 16, 16, 16, 16, 50,  1, 33, 33,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 33, 33,  1, 51, 16, 16, 16, 16, 16],
@@ -152,9 +153,7 @@ class Pacman(pygame.sprite.Sprite):
     """
 
     def __init__(self, my_game, x, y, alg):
-        pygame.sprite.Sprite.__init__(self)
-
-        self.alg = alg 
+        pygame.sprite.Sprite.__init__(self) 
 
         self.game = my_game
         self.x = None
@@ -177,10 +176,7 @@ class Pacman(pygame.sprite.Sprite):
         """
         Reinit pacman parameters
         """
-
-        if alg != None:
-          self.alg = alg
-          self.alg.setup()
+        self.alg = alg
 
         self.x = x
         self.y = y
@@ -425,8 +421,7 @@ class Ghost(pygame.sprite.Sprite):
         self.distances = dict()
         self.allowed_moves = []
         self.forbid_turnback = True
-        #self.direction = "left"
-        self.direction = ''
+        self.direction = 'left'
         self.speed = 55
         self.blinking_tempo = 0
         self.in_tunnel = False
@@ -593,16 +588,16 @@ class Ghost(pygame.sprite.Sprite):
 
         # check walls
         # 28 (0-27) x 31 (0-30)
-        if MAP[y][x-1] < 16:
+        if (MAP[y][x-1] < 16) or (MAP[y][x - 1] == 18):
             allowed_moves.append("left")
         # Problems with right tunnel : a ghost can go there
-        if (x+1 < 28 and MAP[y][x+1] < 16) or x+1 == 28:
+        if (x+1 < 28 and ((MAP[y][x+1] < 16) or (MAP[y][x + 1] == 18))) or x+1 == 28:
             allowed_moves.append("right")
         # if not in jail mode , we can go outside
-        if x<28 and (MAP[y - 1][x] < 16 or (self.mode != "jail" and MAP[y - 1][x] == 17)):
+        if x<28 and (((MAP[y - 1][x] < 16) or (MAP[y - 1][x] == 18)) or (self.mode != "jail" and MAP[y - 1][x] == 17)):
             allowed_moves.append("up")
         # You can only enter in jail in eaten mode
-        if x<28 and (MAP[y + 1][x] < 16 or (self.mode == "eaten" and MAP[y + 1][x] == 17)):
+        if x<28 and (((MAP[y + 1][x] < 16) or (MAP[y + 1][x] == 18)) or (self.mode == "eaten" and MAP[y + 1][x] == 17)):
             allowed_moves.append("down")
 
         # In some positions ghist isn't allowed to go up, except if eaten (to go directly in jail)
@@ -779,8 +774,13 @@ class Game:
     Main class that manages the full game
     """
     def __init__(self, alg):
+
         self.alg = alg
-        self.alg.game = self
+        
+        if alg != None:
+          self.alg.game = self
+
+        self.map = MAP
 
         self.theme = "default"
         self.dymmy = None
@@ -866,7 +866,7 @@ class Game:
         # Bonus
         self.bonus = None
 
-        self.red = Ghost(self, 13, 11, 'red', "scatter")
+        self.red = Ghost(self, 12, 14, 'red', "scatter")
         for color in ("blue", "yellow", "pink"):
             setattr(self, color, Ghost(self, JAIL[color][0], JAIL[color][1], color, "jail") )
 
@@ -879,6 +879,9 @@ class Game:
 
         # declare pacman
         self.pacman = Pacman(self, PACMAN_POS[0], PACMAN_POS[1], self.alg)
+
+        if alg != None:
+          self.alg.setup()
 
         self.all_sprites.add(self.pacman)
         self.all_sprites.add(self.Ghosts)
@@ -1125,7 +1128,6 @@ class Game:
         # sound for ghost back to jail
         pygame.mixer.Sound.play(self.snd_retreating)
 
-
     def start_game(self):
         """
         Start a game
@@ -1164,8 +1166,7 @@ class Game:
 
             time.sleep(1)
         pygame.mixer.Sound.play(self.snd_siren_1, loops=-1, fade_ms=500 )
-
-        
+     
     def loose_life(self):
         """
         Display the dead pacman animation
@@ -1214,6 +1215,10 @@ class Game:
 
         # Reinit everything
         self.pacman.reinit(PACMAN_POS[0], PACMAN_POS[1], self.alg)
+
+        if self.alg != None:
+          self.alg.setup()
+        
         for ghost in self.Ghosts:
             ghost.reinit(JAIL[ghost.color][0], JAIL[ghost.color][1], "jail")
 
@@ -1224,7 +1229,6 @@ class Game:
         # Timers reinit
         self.current_mode_idx = 0
         self.start_mode_timer = time.time()
-
 
     def clear_all_surfaces(self):
         """
@@ -1285,7 +1289,6 @@ class Game:
                     else:
                         if self.count_loops%8 in range(0,3):
                             my_surface.blit(self.Walls[c], (x*24, y*24))
-
 
     def collided(self):
         """
@@ -1385,8 +1388,6 @@ class Game:
                 if self.lifes == 0:
                     running = False
 
-
-
 # Root code
 def main(alg = None):
     """
@@ -1404,4 +1405,4 @@ def main(alg = None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main()
+    main(BFS_Mod())
