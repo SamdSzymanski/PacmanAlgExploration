@@ -2,16 +2,16 @@ from random import choice
 
 class Rand_Dir_Charge():
 
-  game = None
-  opposites = {
+  OPPOSITES = {
     'up' : 'down',
     'right' : 'left',
     'down' : 'up',
     'left' : 'right'
   }
+  game = None
 
   def setup(self):
     print('Rand_Dir_Charge ready')
 
   def get_dir(self):
-    return choice([move for move in self.game.pacman.allowed_moves if move != self.opposites[self.game.pacman.direction]])
+    return choice([move for move in self.game.pacman.allowed_moves if move != self.OPPOSITES[self.game.pacman.direction]])

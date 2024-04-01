@@ -1,9 +1,6 @@
-from algs.parse_level import parse
+from algs.parse_level import parse, map_2_str
 from copy import deepcopy
 import json
-
-def map_2_str(level):
-  return '  '.join([' '.join(map(str, inner)) for inner in level])
 
 class BFS_Mod():
 

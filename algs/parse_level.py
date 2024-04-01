@@ -51,3 +51,6 @@ def parse(level, y, x):
               dirs[node2][node1] = ('left', count)
               break
   return dirs, pacgums
+
+def map_2_str(level):
+  return '  '.join([' '.join(map(str, inner)) for inner in level])
