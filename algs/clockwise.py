@@ -2,7 +2,7 @@ class Clockwise():
     
     game = None
 
-    def setup():
+    def setup(self):
         pass
     
     def get_dir(self):
