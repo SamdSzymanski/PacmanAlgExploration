@@ -12,7 +12,10 @@ class BFS_Gum():
   def get_dir(self):
     y = self.game.pacman.y
     x = self.game.pacman.x
-    graph, _ = parse(self.game.map, y, x)
+    graph, pacgums = parse(self.game.map, y, x)
+    direction = self.game.pacman.direction
+    if pacgums == 0:
+      return direction
     coords = (y, x)
     if coords in graph:
       queue = self.queue
@@ -38,7 +41,7 @@ class BFS_Gum():
             queue = dirs
             return queue.pop(0)
           bag.append(curr + [neighbor])
-    return self.game.pacman.direction
+    return direction
 
 
 

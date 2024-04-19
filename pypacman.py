@@ -23,6 +23,7 @@ from algs.rand_turn import Rand_Turn
 from algs.rand_turn_legal import Rand_Turn_Legal
 from algs.bfs_mod import BFS_Mod
 from algs.bfs_gum import BFS_Gum
+from algs.bfs_rand import BFS_Rand
 
 
 LEVELS = {}
