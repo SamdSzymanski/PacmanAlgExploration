@@ -13,13 +13,20 @@ class BFS_Rand():
     print('BFS_Rand ready')
   
   def get_dir(self):
+    game = self.game
+    pacman = game.pacman
+    y = pacman.y
+    x = pacman.x
+    coords = (y, x)
+    graph = self.graph
+    direction = pacman.direction
     if len(self.queue) == 0:
-      if (self.game.pacman.y, self.game.pacman.x) in self.graph:
-        self.graph, _ = parse(self.game.map, self.game.pacman.y, self.game.pacman.x)
-        target = choice(list(self.graph.keys()))
-        self.queue = bfs(self.graph, (self.game.pacman.y, self.game.pacman.x), target)
+      if coords in graph:
+        graph, _ = parse(game.map, y, x)
+        target = choice(list(graph.keys()))
+        self.queue = bfs(graph, coords, target)
         return self.queue.pop(0)
-      return self.game.pacman.direction
-    if (self.game.pacman.y, self.game.pacman.x) in self.graph:
+      return direction
+    if coords in graph:
       return self.queue.pop(0)
-    return self.game.pacman.direction
+    return direction
