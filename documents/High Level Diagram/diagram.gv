@@ -1,0 +1,11 @@
+digraph {
+  rankdir = "LR";
+  
+  alg [shape = "box";];
+  game [shape = "box";];
+  data [shape = "box";];
+  p_script [shape = "box";label = "processing script";];
+  g [shape = "box";label = "charts";];
+  
+  alg -> game -> data -> p_script -> g;
+}
