@@ -52,5 +52,22 @@ def parse(level, y, x):
               break
   return dirs, pacgums
 
+def parse_all(level):
+  graph = {}
+  for row in range(1, len(level) - 1):
+    for space in range(len(level[0])):
+      if level[row][space] < 16:
+        graph[(row, space)] = {}
+        graph[(row, space)]['val'] = 1 if level[row][space] > 0 else 0
+        if (row - 1, space) in graph:
+          graph[(row, space)][(row - 1, space)] = 'up'
+          graph[(row - 1, space)][(row, space)] = 'down'
+        if (row, space - 1) in graph:
+          graph[(row, space)][(row, space - 1)] = 'left'
+          graph[(row, space - 1)][(row, space)] = 'right'
+  graph[(14, 0)][(14, 27)] = 'left'
+  graph[(14, 27)][(14, 0)] = 'right'
+  return graph
+
 def map_2_str(level):
   return '  '.join([' '.join(map(str, inner)) for inner in level])

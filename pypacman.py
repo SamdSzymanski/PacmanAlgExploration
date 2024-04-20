@@ -1118,7 +1118,7 @@ class Game:
             self.display_lifes(self.bottom)
 
             # draw score on the top of ghost
-            self.surface.blit(self.Scores[score], (x_pos, y_pos - (4*i)))
+            #self.surface.blit(self.Scores[score], (x_pos, y_pos - (4*i)))
 
             self.blit_all_surfaces()
 
@@ -1396,6 +1396,12 @@ def main(alg = None):
     """
     main code to call the game
     """
+    vals = list(SCATTER.values())
+    for color in ['red', 'blue', 'yellow', 'pink']:
+      val = random.choice(vals)
+      SCATTER[color] = val
+      vals.remove(val)
+
     game = Game(alg)
 
     # Play the game
@@ -1408,4 +1414,4 @@ def main(alg = None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main(BFS_Agress())
+    main(BFS_Rand())

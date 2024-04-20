@@ -23,7 +23,9 @@ class BFS_Rand():
     if len(self.queue) == 0:
       if coords in graph:
         graph, _ = parse(game.map, y, x)
-        target = choice(list(graph.keys()))
+        target = coords
+        while target == coords:
+          target = choice(list(graph.keys()))
         self.queue = bfs(graph, coords, target)
         return self.queue.pop(0)
       return direction
