@@ -25,6 +25,7 @@ from algs.bfs_mod import BFS_Mod
 from algs.bfs_gum import BFS_Gum
 from algs.bfs_rand import BFS_Rand
 from algs.bfs_agress import BFS_Agress
+from algs.a_star_rand import A_Star_Rand
 
 
 LEVELS = {}
@@ -1414,4 +1415,4 @@ def main(alg = None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main(BFS_Rand())
+    main(A_Star_Rand())
