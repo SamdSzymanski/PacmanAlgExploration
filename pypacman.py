@@ -1415,4 +1415,4 @@ def main(alg = None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main(A_Star_Rand())
+    main(BFS_Mod())
