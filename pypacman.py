@@ -26,6 +26,8 @@ from algs.bfs_gum import BFS_Gum
 from algs.bfs_rand import BFS_Rand
 from algs.bfs_agress import BFS_Agress
 from algs.a_star_rand import A_Star_Rand
+from algs.a_star_agress import A_Star_Agress
+from algs.parse_level import parse
 
 
 LEVELS = {}
@@ -83,10 +85,10 @@ FRUITS = {  "cherry": {  'id': 7, "score": 100 },
             "key": {  'id': 14, "score": 5000 }
 }
 
-SCATTER = { "red": (26,1) ,
-            "blue": (26,29),
-            "yellow": (1,29),
-            "pink": (1,1)
+SCATTER = { "red": None ,
+            "blue": None,
+            "yellow": None,
+            "pink": None
 }
 
 JAIL = { "red": (12,14) ,
@@ -1225,6 +1227,12 @@ class Game:
         
         for ghost in self.Ghosts:
             ghost.reinit(JAIL[ghost.color][0], JAIL[ghost.color][1], "jail")
+        
+        vals = list(SCATTER.values())
+        for color in ['red', 'blue', 'yellow', 'pink']:
+          val = random.choice(vals)
+          SCATTER[color] = val
+          vals.remove(val)
 
         # Remaining lifes ? We restart
         if self.lifes > 0:
@@ -1397,11 +1405,9 @@ def main(alg = None):
     """
     main code to call the game
     """
-    vals = list(SCATTER.values())
+    graph, _ = parse(MAP, 1, 1)
     for color in ['red', 'blue', 'yellow', 'pink']:
-      val = random.choice(vals)
-      SCATTER[color] = val
-      vals.remove(val)
+      SCATTER[color] = random.choice(list(graph.keys()))
 
     game = Game(alg)
 
@@ -1415,4 +1421,4 @@ def main(alg = None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main(A_Star_Rand())
+    main(A_Star_Agress())
