@@ -1,0 +1,60 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="478pt" height="44pt" viewBox="0.00 0.00 478.48 44">
+<g id="graph0" class="graph" transform="translate(4,40) scale(1)" data-name="">
+<polygon fill="white" stroke="none" points="-4,4 -4,-40 474.48,-40 474.48,4 -4,4"/>
+<!-- algorithm -->
+<g id="node1" class="node" pointer-events="visible" data-name="alg" data-comment="algorithm">
+
+<polygon fill="none" stroke="black" points="54,-36 0,-36 0,0 54,0 54,-36"/>
+<text text-anchor="middle" x="27" y="-13.8" font-family="Times,serif" font-size="14.00">alg</text>
+</g>
+<!-- pacman -->
+<!-- game -->
+<g id="node2" class="node" pointer-events="visible" data-name="game">
+
+<polygon fill="none" stroke="black" points="144,-36 90,-36 90,0 144,0 144,-36"/>
+<text text-anchor="middle" x="117" y="-13.8" font-family="Times,serif" font-size="14.00">game</text>
+</g>
+<!-- d -->
+
+<!-- game&#45;&gt;d -->
+<g id="edge2" class="edge" data-name="game-&gt;data" data-comment="game-&gt;d">
+
+<path fill="none" stroke="black" d="M144.4,-18C151.89,-18 160.18,-18 168.2,-18"/>
+<polygon fill="black" stroke="black" points="168.1,-21.5 178.1,-18 168.1,-14.5 168.1,-21.5"/>
+</g>
+<g id="node3" class="node" pointer-events="visible" data-name="data" data-comment="game-&gt;d">
+
+<polygon fill="none" stroke="black" points="234,-36 180,-36 180,0 234,0 234,-36"/>
+<text text-anchor="middle" x="207" y="-13.8" font-family="Times,serif" font-size="14.00">data</text>
+</g><g id="edge1" class="edge" data-name="alg-&gt;game" data-comment="game-&gt;d">
+
+<path fill="none" stroke="black" d="M54.4,-18C61.89,-18 70.18,-18 78.2,-18"/>
+<polygon fill="black" stroke="black" points="78.1,-21.5 88.1,-18 78.1,-14.5 78.1,-21.5"/>
+</g>
+<!-- p_script -->
+<g id="node4" class="node" pointer-events="visible" data-name="p_script">
+
+<polygon fill="none" stroke="black" points="380.72,-36 269.76,-36 269.76,0 380.72,0 380.72,-36"/>
+<text text-anchor="middle" x="325.24" y="-13.8" font-family="Times,serif" font-size="14.00">processing script</text>
+</g>
+<!-- data&#45;&gt;p_script -->
+<g id="edge3" class="edge" data-name="data-&gt;p_script">
+
+<path fill="none" stroke="black" d="M234.38,-18C241.56,-18 249.68,-18 258.02,-18"/>
+<polygon fill="black" stroke="black" points="257.96,-21.5 267.96,-18 257.96,-14.5 257.96,-21.5"/>
+</g>
+<!-- g -->
+<g id="node5" class="node" pointer-events="visible" data-name="g">
+
+<polygon fill="none" stroke="black" points="470.48,-36 416.48,-36 416.48,0 470.48,0 470.48,-36"/>
+<text text-anchor="middle" x="443.48" y="-13.8" font-family="Times,serif" font-size="14.00">charts</text>
+</g>
+<!-- p_script&#45;&gt;g -->
+<g id="edge4" class="edge" data-name="p_script-&gt;g">
+
+<path fill="none" stroke="black" d="M380.96,-18C388.99,-18 397.12,-18 404.71,-18"/>
+<polygon fill="black" stroke="black" points="404.61,-21.5 414.61,-18 404.61,-14.5 404.61,-21.5"/>
+</g>
+</g>
+</svg>
