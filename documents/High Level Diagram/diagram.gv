@@ -1,11 +1,24 @@
 digraph {
   rankdir = "LR";
   
-  alg [shape = "box";];
-  game [shape = "box";];
-  data [shape = "box";];
-  p_script [shape = "box";label = "processing script";];
-  g [shape = "box";label = "charts";];
+  subgraph cluster_1 {
+    alg [shape = "box";];
+    game [shape = "box";];
+    data [shape = "box";];
+    dataset [shape = "box";];
+    
+    alg -> game -> data -> dataset;
+  }
   
-  alg -> game -> data -> p_script -> g;
+  subgraph cluster_2 {
+    dataset2 [shape = "box";label = "dataset";];
+    p_script [shape = "box";label = "processing script";];
+    g [shape = "box";label = "charts";];
+    
+    dataset2 -> p_script -> g;
+  }
+  inv [style = "invis";label = "";width = "";height = "";];
+  
+  inv -> alg [style = "invis";];
+  inv -> dataset2 [style = invis;];
 }
