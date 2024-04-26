@@ -27,6 +27,7 @@ from algs.bfs_rand import BFS_Rand
 from algs.bfs_agress import BFS_Agress
 from algs.a_star_rand import A_Star_Rand
 from algs.a_star_agress import A_Star_Agress
+from algs.dijkstra_rand import Dijkstra_Rand
 from algs.parse_level import parse
 
 
@@ -1421,4 +1422,4 @@ def main(alg = None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main(BFS_Gum())
+    main(Dijkstra_Rand())
