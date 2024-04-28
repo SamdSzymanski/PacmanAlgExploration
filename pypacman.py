@@ -12,6 +12,7 @@ import math
 import os
 import pygame
 import argparse
+import json
 
 #algs
 from algs.rand_dir import Rand_Dir
@@ -1406,6 +1407,8 @@ def main(alg = None):
     """
     main code to call the game
     """
+    start = time.time()
+
     graph, _ = parse(MAP, 1, 1)
     for color in ['red', 'blue', 'yellow', 'pink']:
       SCATTER[color] = random.choice(list(graph.keys()))
@@ -1415,11 +1418,10 @@ def main(alg = None):
     # Play the game
     game.play()
 
-    print("Remaining pacgums:", game.pacgums)
-    print("Score:", game.score)
-
     pygame.quit()
+
+    return alg.__class__.__name__, 244 - game.pacgums, game.score, time.time() - start, game.pacgums == 0
 
 if __name__ == "__main__":
     # execute only if run as a script
-    main(Dijkstra_Rand())
+    print(main(A_Star_Agress()))
